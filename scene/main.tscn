@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://c0s0f4jxmpeh1"]
+
+[ext_resource type="Script" uid="uid://js653df3o5rt" path="res://script/Main.gd" id="1_wp4xf"]
+[ext_resource type="PackedScene" uid="uid://ds07b6wxu04pe" path="res://scene/player.tscn" id="2_wp4xf"]
+[ext_resource type="PackedScene" uid="uid://cr7j83tnrhplt" path="res://scene/boss.tscn" id="3_0ha60"]
+
+[node name="Main" type="Node2D" unique_id=262813387]
+script = ExtResource("1_wp4xf")
+
+[node name="Player" parent="." unique_id=640660642 instance=ExtResource("2_wp4xf")]
+position = Vector2(47, 143)
+
+[node name="Boss" parent="." unique_id=18436525 instance=ExtResource("3_0ha60")]
+position = Vector2(375, 143)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=813786337]
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="UI" unique_id=942784944]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 41.0
+theme_override_font_sizes/font_size = 12
+
+[node name="BossHealthBar" type="ProgressBar" parent="UI" unique_id=648790285]
+offset_left = 380.0
+offset_top = 20.0
+offset_right = 460.0
+offset_bottom = 41.0
+theme_override_font_sizes/font_size = 12
+
+[node name="ResultLabel" type="Label" parent="UI" unique_id=1966139111]
+offset_left = 224.0
+offset_top = 101.0
+offset_right = 264.0
+offset_bottom = 168.0
+theme_override_font_sizes/font_size = 48
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1172502066]
+position = Vector2(240, 136)

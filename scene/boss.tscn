@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://cr7j83tnrhplt"]
+
+[ext_resource type="Script" uid="uid://dj34juse3qs0a" path="res://script/boss/Boss.gd" id="1_kn3ce"]
+[ext_resource type="Script" uid="uid://d25rcgfmg5qh1" path="res://script/boss/BossHurtbox.gd" id="2_hrqh5"]
+[ext_resource type="Script" uid="uid://rwyirsbh43ug" path="res://script/state_machine/StateMachine.gd" id="3_bckdp"]
+[ext_resource type="Script" uid="uid://w1s85cir806k" path="res://script/boss/BossIdle.gd" id="4_vuh1s"]
+[ext_resource type="Script" uid="uid://b53ve4bvhc6lk" path="res://script/boss/BossChase.gd" id="5_1kjjc"]
+[ext_resource type="Script" uid="uid://bs78k3tr6f3ul" path="res://script/boss/BossAttack.gd" id="6_yt3yj"]
+[ext_resource type="Script" uid="uid://5skinhasht52" path="res://script/boss/BossDashAttack.gd" id="7_gtfqc"]
+[ext_resource type="Script" uid="uid://k5dow66fkiva" path="res://script/boss/BossHitbox.gd" id="7_tcgrh"]
+[ext_resource type="Script" uid="uid://c4pcyj12rtoyr" path="res://script/boss/BossComboAttack.gd" id="8_ex4t5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_brvut"]
+radius = 23.021729
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o1i15"]
+radius = 23.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhunq"]
+size = Vector2(32, 32)
+
+[node name="Boss" type="CharacterBody2D" unique_id=18436525]
+script = ExtResource("1_kn3ce")
+
+[node name="TempVisual" type="ColorRect" parent="." unique_id=276256547]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+color = Color(0.62762386, 0.00090583274, 0.0004962762, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1120190771]
+shape = SubResource("CircleShape2D_brvut")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=425850237]
+script = ExtResource("2_hrqh5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1937208309]
+shape = SubResource("CircleShape2D_o1i15")
+
+[node name="StateMachine" type="Node" parent="." unique_id=989621502 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_bckdp")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1899311082]
+script = ExtResource("4_vuh1s")
+
+[node name="Chase" type="Node" parent="StateMachine" unique_id=2040830508]
+script = ExtResource("5_1kjjc")
+
+[node name="Attack" type="Node" parent="StateMachine" unique_id=1736392654]
+script = ExtResource("6_yt3yj")
+
+[node name="DashAttack" type="Node" parent="StateMachine" unique_id=786194721]
+script = ExtResource("7_gtfqc")
+
+[node name="ComboAttack" type="Node" parent="StateMachine" unique_id=1710857646]
+script = ExtResource("8_ex4t5")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=350081681]
+monitoring = false
+script = ExtResource("7_tcgrh")
+damage = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1036529595]
+position = Vector2(42, 0)
+shape = SubResource("RectangleShape2D_bhunq")
+
+[node name="DashIndicator" type="Line2D" parent="." unique_id=416595546]
+width = 4.0
+default_color = Color(1, 0, 0, 0.4)
